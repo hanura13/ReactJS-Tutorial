@@ -1,6 +1,6 @@
 
 import React, {Component, Fragment} from 'react';
-import Post from '../../component/Post/Post';
+import Post from '../../../component/Post/Post';
 import './BlogPost.css';
 import axios from 'axios';
 
@@ -45,7 +45,7 @@ class BlogPost extends Component{
             console.log(res);
             this.getPostAPI();
             this.setState({
-                isUpdate: false,
+                //isUpdate: false,
                 formBlogPost: {
                     id: 1,
                     title: '',
@@ -113,6 +113,8 @@ class BlogPost extends Component{
     render(){
         return(
             <Fragment>
+                <p className="section-title">Halaman BlogPost</p>
+                <hr/>
                  <p className="section-title">Blog Post</p>
                  <div className="form-add-post">
                      <label htmlFor="header">Title</label>

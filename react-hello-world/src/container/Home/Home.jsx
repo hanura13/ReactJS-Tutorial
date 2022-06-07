@@ -1,64 +1,35 @@
-import React, {Component} from 'react';
-import BlogPost from '../BlogPost/BlogPost';
-//import LifeCycleComp from '../LifeCycleComp/LifeCycleComp';
-//import YouTubeComp from '../../component/YouTubeComp/YouTubeComp';
-//import Product from '../Product/Product';
-
+import React, {Component, Fragment} from 'react';
+import BlogPost from '../pages/BlogPost/BlogPost';
+import LifeCycleComp from '../pages/LifeCycleComp/LifeCycleComp';
+import Product from '../pages/Product/Product';
+import './Home.css';
+import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom';
+import YoutubeCompPage from '../pages/YoutubeCompPage/YoutubeCompPage';
 
 class Home extends Component {
     state={
         showComponent: true
     }
 
-    componentDidMount(){
-        // setTimeout(() => {
-        //     this.setState({
-        //         showComponent: false
-        //     })
-        // }, 15000)
-    }
-
     render(){
         return(
-            <div>
-                {/*<p>Youtube</p>
-                <hr/>
-                <YouTubeComp 
-                    time="7.12" 
-                    title="How to see"
-                    desc="2x ditonton"/>
-                <YouTubeComp 
-                    time="4.00" 
-                    title="How to Open"
-                    desc="3x ditonton"/>
-                <YouTubeComp 
-                    time="5.12" 
-                    title="How to feel"
-                    desc="1x ditonton"/>
-                <YouTubeComp 
-                    time="3.40" 
-                    title="How to smell"
-                    desc="2x ditonton"/>
-                 <YouTubeComp/> */}
+            <Router>
+            <Fragment>
+                <div className="navigation">
+                    <Link to="/">BlogPost</Link>
+                    <Link to="/product">Product</Link>
+                    <Link to="/lifecycle">LifeCycle</Link>
+                    <Link to="/youtube">Youtube</Link>
+                </div>
+                <Routes>
+                <Route path="/" exact element={<BlogPost/>}/>
+                <Route path="/product" exact element={<Product/>}/>
+                <Route path="/lifecycle" exact   element={<LifeCycleComp/>}/>
+                <Route path="/youtube" element={<YoutubeCompPage/>}/>
+                </Routes>
+            </Fragment>
 
-                {/*<p>Counter</p>
-                <hr/>
-                <Product/> */}
-                
-                {/* <p>LifeCycle Component</p>
-                <hr/>
-                {
-                    this.state.showComponent
-                    ?
-                    <LifeCycleComp/>
-                    : null
-                } */}
-
-                <p>Blog Post</p>
-                <hr/>
-                <BlogPost />
-            </div>
-            
+            </Router>
         )
     }
 }

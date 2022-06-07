@@ -17,6 +17,8 @@ class Product extends Component {
     render(){
         return(
             <Fragment>
+                <p>Halaman Product</p>
+                <hr/>
                 <div className="header">
                     <div className="logo">
                         <img src="https://ecs7.tokopedia.net/assets-tokopedia-lite/v2/zeus/production/e5b8438b.svg" alt=""/>
