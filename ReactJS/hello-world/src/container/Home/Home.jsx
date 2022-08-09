@@ -1,0 +1,49 @@
+
+//Libraries
+import React, { Component, Fragment } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+
+//pages
+import LifeCycleComp from "../pages/LifeCycleComp/LifeCycleComp";
+import Product from "../pages/Product/Product";
+import BlogPost from "../pages/BlogPost/BlogPost";
+import YoutubeComp from "../pages/YoutubeComp/YoutubeComp";
+
+//Styling
+import "./Home.css"
+import DetailPost from "../pages/BlogPost/DetailPost/DetailPost";
+
+
+class Home extends Component {
+
+    state = {
+        showComponent: true
+    }
+
+    render() {
+        return (
+            <BrowserRouter>
+
+                <Fragment>
+                    <div className="navigation">
+                        <Link to="/">Home</Link>
+                        <Link to="/product">Product</Link>
+                        <Link to="/lifecycle">LifeCycle</Link>
+                        <Link to="/youtubecomp">Youtube</Link>
+                    </div>
+                    <Routes>
+                        <Route path="/" element={<BlogPost />} />
+                        <Route path="/detail-post/:id" element={<DetailPost />} />
+                        <Route path="/product" element={<Product />} />
+                        <Route path="/lifecycle" element={<LifeCycleComp />} />
+                        <Route path="/youtubecomp" element={<YoutubeComp />} />
+                    </Routes>
+                </Fragment>
+
+            </BrowserRouter>
+
+        )
+    }
+}
+
+export default Home;
