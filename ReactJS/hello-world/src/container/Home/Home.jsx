@@ -1,6 +1,6 @@
 
 //Libraries
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, createContext } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 
 //pages
@@ -12,18 +12,15 @@ import YoutubeComp from "../pages/YoutubeComp/YoutubeComp";
 //Styling
 import "./Home.css"
 import DetailPost from "../pages/BlogPost/DetailPost/DetailPost";
+import GlobalProvider from "../../context/context";
+
 
 
 class Home extends Component {
 
-    state = {
-        showComponent: true
-    }
-
     render() {
         return (
             <BrowserRouter>
-
                 <Fragment>
                     <div className="navigation">
                         <Link to="/">Home</Link>
@@ -39,11 +36,11 @@ class Home extends Component {
                         <Route path="/youtubecomp" element={<YoutubeComp />} />
                     </Routes>
                 </Fragment>
-
-            </BrowserRouter>
+            </BrowserRouter >
 
         )
     }
+
 }
 
-export default Home;
+export default GlobalProvider(Home);

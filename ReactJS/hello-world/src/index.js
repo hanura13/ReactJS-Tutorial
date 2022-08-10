@@ -2,12 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Home from './container/Home/Home'
+import Home from './container/Home/Home';
+// import {createStore} from 'redux';
+// import {Provider} from 'react-redux';
+// import rootReducer from './redux/reducer/globalReducer';
+
+
+//Store
+//const storeRedux = createStore(rootReducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    {/* <Provider store={storeRedux}>
+        <Home/>
+    </Provider> */}
     <Home/>
+
   </React.StrictMode>
 );
 

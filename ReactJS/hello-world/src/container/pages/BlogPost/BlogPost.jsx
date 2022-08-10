@@ -3,6 +3,7 @@ import Post from '../../../component/Post/Post';
 import './BlogPost.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API from '../../../services';
 
 class BlogPost extends Component {
 
@@ -16,21 +17,26 @@ class BlogPost extends Component {
         },
 
         isUpdate: false,
+        comments: []
 
     }
 
     getPostAPI = () => {
-        axios.get('http://localhost:3004/posts?_sort=id&_order=desc')
-            .then((result) => {
-                this.setState({
-                    post: result.data
-                })
+        API.GetNewsBlog().then(result => {
+            this.setState({
+                post: result
             })
+        })
+        API.GetComments().then(result => {
+            this.setState({
+                comments: result
+            })
+        })
     }
 
     postDataToAPI = () => {
-        axios.post('http://localhost:3004/posts', this.state.formBlogPost)
-            .then((res) => {
+        API.PostNewsBlog(this.state.formBlogPost)
+            .then((result) => {
                 this.getPostAPI();
                 this.setState({
                     isUpdate: false,
@@ -41,8 +47,6 @@ class BlogPost extends Component {
                         userId: 1
                     },
                 })
-            }, (err) => {
-                console.log('eror: ', err);
             })
     }
 
@@ -125,6 +129,11 @@ class BlogPost extends Component {
                     <textarea name="body" value={this.state.formBlogPost.body} id="body" cols="30" row="10" placeholder="add blog content" onChange={this.handleFormChange} ></textarea>
                     <button className="btn-submit" onClick={this.handleSubmit}>Simpan</button>
                 </div>
+                {/* {
+                    this.state.comments.map(comments => {
+                        return <p>{comments.name} - {comments.email}</p>
+                    })
+                } */}
                 {
                     this.state.post.map(post => {
                         return <Post key={post.id} data={post} remove={this.handleRemove} update={this.handleUpdate} goDetail={this.handleDetail} />

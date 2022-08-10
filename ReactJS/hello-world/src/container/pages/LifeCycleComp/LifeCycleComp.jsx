@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import './LifeCycleComp.css'
+import './LifeCycleComp.css';
+import { rootContext } from '../../Home/Home';
+import GlobalProvider, { GlobalConsumer } from '../../../context/context';
 
 class LifeCycleComp extends Component {
 
@@ -57,7 +59,7 @@ class LifeCycleComp extends Component {
         })
     }
     render() {
-        console.log('render')
+        console.log(this)
         return (
             <Fragment>
                 <p>Halaman lifecycle</p>
@@ -66,10 +68,19 @@ class LifeCycleComp extends Component {
                     onClick={this.changeCount}>
                     Component Button{this.state.count}
                 </button>
-            </Fragment>
+                <hr />
 
+                <p>Total order: {this.props.state.totalOrder}</p>
+            </Fragment>
         )
     }
 }
 
-export default LifeCycleComp;
+// const mapStateProps = (state) => {
+//     return {
+//         order: state.totalOrder
+//     }
+// }
+
+// export default connect(mapStateProps)(LifeCycleComp);
+export default GlobalConsumer(LifeCycleComp);
