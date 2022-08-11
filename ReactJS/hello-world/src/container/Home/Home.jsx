@@ -8,6 +8,7 @@ import LifeCycleComp from "../pages/LifeCycleComp/LifeCycleComp";
 import Product from "../pages/Product/Product";
 import BlogPost from "../pages/BlogPost/BlogPost";
 import YoutubeComp from "../pages/YoutubeComp/YoutubeComp";
+import Hooks from "../pages/Hooks/Hooks";
 
 //Styling
 import "./Home.css"
@@ -27,6 +28,7 @@ class Home extends Component {
                         <Link to="/product">Product</Link>
                         <Link to="/lifecycle">LifeCycle</Link>
                         <Link to="/youtubecomp">Youtube</Link>
+                        <Link to="/hooks">Hooks</Link>
                     </div>
                     <Routes>
                         <Route path="/" element={<BlogPost />} />
@@ -34,6 +36,7 @@ class Home extends Component {
                         <Route path="/product" element={<Product />} />
                         <Route path="/lifecycle" element={<LifeCycleComp />} />
                         <Route path="/youtubecomp" element={<YoutubeComp />} />
+                        <Route path="/hooks" element={<Hooks />} />
                     </Routes>
                 </Fragment>
             </BrowserRouter >
