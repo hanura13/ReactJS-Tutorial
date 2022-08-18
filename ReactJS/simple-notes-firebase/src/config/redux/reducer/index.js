@@ -1,7 +1,11 @@
+import { findAllByDisplayValue } from "@testing-library/react"
 
 const initState = {
     popup: false,
-    isLogin: false
+    isLogin: false,
+    isLoading: false,
+    user: {},
+    notes: []
 }
 
 
@@ -15,7 +19,25 @@ const reducer = (state=initState , action) => {
     if(action.type === 'CHANGE_ISLOGIN'){
         return{
             ...state,
-            islogin: action.value
+            isLogin: action.value
+        }
+    }
+    if(action.type === 'CHANGE_USER'){
+        return{
+            ...state,
+            user: action.value
+        }
+    }
+    if(action.type === 'CHANGE_LOADING'){
+        return{
+            ...state,
+            isLoading: action.value
+        }
+    }
+    if(action.type === 'SET_NOTES'){
+        return{
+            ...state,
+            notes: action.value
         }
     }
     return state;

@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import './Register.scss';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import Button from '../../../component/atom/Button';
+import { registerUserAPI } from '../../../config/redux/action';
 
 class Register extends Component{
     state={
@@ -16,22 +19,16 @@ class Register extends Component{
 
     }
 
-    handleRegisterSubmit= () => {
-        const {email, password} = this.state;
+    handleRegisterSubmit= async () => {
         const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
-             .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log(userCredential);
-            // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-                // ..
-        });
+        const {email, password} = this.state;
+        const res = await this.props.registerAPI({auth, email, password});
+        if(res){
+            this.setState({
+                email: '',
+                password: ''
+            })  
+        }
     }
 
     render(){
@@ -39,9 +36,9 @@ class Register extends Component{
             <div className="auth-container">
                 <div className="auth-card">
                     <p className="auth-title">Register Page</p>
-                    <input className="input" id="email" placeholder="Email" type="text" onChange={this.handleChangeText}/>
-                    <input className="input" id="password" placeholder="Password" type="password" onChange={this.handleChangeText}/>
-                    <button className="btn" onClick={this.handleRegisterSubmit}>Sign Up</button>
+                    <input className="input" id="email" placeholder="Email" type="text" onChange={this.handleChangeText} value={this.state.email}/>
+                    <input className="input" id="password" placeholder="Password" type="password" onChange={this.handleChangeText} value={this.state.password}/>
+                    <Button klik={this.handleRegisterSubmit} judul="Register" loading={this.props.isLoading} />
                 </div>
                 {/* <button>Dashboard</button> */}
             </div>
@@ -49,4 +46,12 @@ class Register extends Component{
     }
 }
 
-export default Register;
+const reduxState = (state)=> ({
+    isLoading: state.isLoading
+})
+
+const reduxDispatch = (dispatch) => ({
+    registerAPI: (data) => dispatch(registerUserAPI(data))
+})
+
+export default connect(reduxState, reduxDispatch )(Register);
