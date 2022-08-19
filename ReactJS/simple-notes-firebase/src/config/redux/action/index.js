@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword  } from "firebase/auth";
 import firebase from '../../firebase'
-import { getDatabase, ref, push, onValue } from "firebase/database";
+import { getDatabase, ref, push, onValue, set, remove} from "firebase/database";
 import { type } from "@testing-library/user-event/dist/type";
 
 
@@ -96,6 +96,51 @@ export const getDataToAPI = (userId) => (dispatch) => {
             resolve(snapshot.val())
             // updateStarCount(postElement, data);
         });
+    })
+    
+}
+
+
+export const updateDataToAPI = (data) => (dispatch) => {
+    const db = getDatabase();
+    return new Promise((resolve, reject) => {
+        set(ref(db, `notes/${data.userId}/${data.noteId}`), {
+            title: data.title,
+            date: data.date,
+            content : data.content
+            
+          })
+          .then(() => {
+            // Data saved successfully!
+            resolve(true)
+          })
+          .catch((error) => {
+            // The write failed...
+            reject(false)
+          });
+          
+          
+    })
+    
+}
+
+
+export const deleteDataToAPI = (data) => (dispatch) => {
+    const db = getDatabase();
+    return new Promise((resolve, reject) => {
+        remove(ref(db, `notes/${data.userId}/${data.noteId}`), {
+            
+          })
+          .then(() => {
+            // Data saved successfully!
+            resolve(true)
+          })
+          .catch((error) => {
+            // The write failed...
+            reject(false)
+          });
+          
+          
     })
     
 }
